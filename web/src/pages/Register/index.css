@@ -1,0 +1,100 @@
+main{
+  height: 100vh;
+  display: flex;
+}
+
+.register{
+  width: 90%;
+  max-width: 450px;
+  padding: 20px;
+  border-radius: 6px;
+  margin: auto;
+  
+  box-shadow: 10px 10px 88px -42px rgba(0,0,0,0.75);
+}
+
+.register .container .header{
+  text-align: center;
+}
+
+.register .container .header h1{
+  font-size: 48px;
+  font-weight: 600;
+}
+
+.register .container form .input-form{
+  display: flex;
+  flex-direction: column;
+  margin-top: 40px;
+  gap: 10px;
+
+  position: relative;
+}
+
+.register .container form .input-form .icon{
+  position: absolute;
+  top: 70%;
+  right: 20px;
+  transform: translateY(-50%);
+  cursor: pointer;
+  /* z-index: 1000; */
+}
+
+.register .container form .input-form span{
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.register .container form .input-form input{
+  padding: 18px;
+  border-radius: 6px;
+  border: 1px solid #86878A;
+  font-size: 18px;
+}
+
+.register .container form .input-form input:focus{
+  border: 1px solid #6246EA;
+}
+
+.register .container form .input-form input::placeholder{
+  color: #86878A;
+}
+
+.register .container form .btn{
+  margin-top: 40px;
+  width: 100%;
+
+  padding: 15px;
+  border: 1px solid #6246EA;
+  border-radius: 6px;
+  background-color: #6246EA;
+
+  font-size: 20px;
+  font-weight: 400;
+  color: #fff;
+
+  cursor: pointer;
+  transition: 0.45s;
+}
+
+.register .container form .btn:hover{
+  background-color: transparent;
+  color: #000;
+}
+
+.warning{
+  text-align: center;
+  margin-top: 20px;
+  font-size: 20px;
+  color: #f41212;
+  height: 30px;
+}
+
+.link span{
+  color: #86878A;
+}
+
+.link a{
+  color: #6246EA;
+}
+

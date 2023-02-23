@@ -1,0 +1,148 @@
+main {
+  height: 100vh;
+  display: flex;
+}
+
+.login {
+  max-width: 1440px;
+  width: 90%;
+  height: 700px;
+  margin: auto;
+
+  display: flex;
+
+  box-shadow: 10px 10px 88px -42px rgba(0, 0, 0, 0.75);
+}
+
+.leftside {
+  width: 50%;
+  background-color: #6246EA;
+
+  display: flex;
+
+}
+
+.welcome {
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  font-weight: 700;
+  font-size: 96px;
+  color: #fff;
+}
+
+.rightside{
+  width: 50%;
+  padding: 20px;
+
+  display: flex;
+}
+
+.login .container{
+  max-width: 400px;
+  width: 95%;
+  margin: auto;
+}
+
+.login .container .header{
+  line-height: 40px;
+}
+
+.login .container .header h1{
+  font-size: 48px;
+  font-weight: 600;
+}
+
+.login .container .header span{
+  color: #86878A;
+}
+
+.login .container form .input-form{
+  display: flex;
+  flex-direction: column;
+  margin-top: 40px;
+  gap: 10px;
+  
+  position: relative;
+}
+
+.login .container form .input-form .icon{
+  position: absolute;
+  top: 70%;
+  right: 20px;
+  transform: translateY(-50%);
+  cursor: pointer;
+  /* z-index: 1000; */
+}
+
+.login .container form .input-form span{
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.login .container form .input-form input{
+  padding: 18px;
+  border-radius: 6px;
+  border: 1px solid #86878A;
+  font-size: 18px;
+}
+
+.login .container form .input-form input:focus{
+  outline: none;
+  border: 1px solid #6246EA;
+}
+
+.login .container form .input-form input::placeholder{
+  color: #86878A;
+}
+
+.login .container form .btn{
+  margin-top: 40px;
+  width: 100%;
+
+  padding: 15px;
+  border: 1px solid #6246EA;
+  background-color: #6246EA;
+  border-radius: 6px;
+
+  font-size: 20px;
+  font-weight: 400;
+  color: #fff;
+
+  cursor: pointer;
+  transition: 0.45s;
+}
+
+.login .container form .btn:hover{
+  background-color: transparent;
+  color: #000;
+}
+
+.warning{
+  text-align: center;
+  margin-top: 20px;
+  font-size: 20px;
+  color: #f41212;
+  height: 30px;
+}
+
+.link{
+  color: #86878A;
+}
+
+.link a{
+  color: #6246EA;
+}
+
+@media (max-width: 990px) {
+  .leftside{
+    display: none;
+  }
+
+  .rightside{
+    /* max-width: 400px; */
+    width: 100%;
+
+    margin: auto;
+  }
+}

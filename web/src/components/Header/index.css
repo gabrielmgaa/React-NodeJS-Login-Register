@@ -1,0 +1,49 @@
+header{
+  background-color: #6246EA;
+}
+
+header .container {
+  width: 90%;
+  display: flex;
+  justify-content: space-between;
+  max-width: 1800px;
+  margin: auto;
+  padding: 20px;
+}
+
+header .container .menu-section{
+  display: none;
+}
+
+header .container nav{
+  display: flex;
+  align-items: center;
+}
+
+header .container nav ul{
+  display: flex;
+  gap: 10px;
+}
+
+header .container nav ul li{
+  justify-items: center;
+  list-style: none;
+}
+
+header .container nav ul li a{
+  text-decoration: none;
+  color: #000;
+  font-weight: 600;
+  align-items: center;
+}
+
+header .container .user{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #c5cada56;
+  border-radius: 100%;
+  width: 70px;
+  height: 70px;
+  cursor: pointer;
+}
