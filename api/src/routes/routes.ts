@@ -1,8 +1,11 @@
 import express from "express"
+import { PrismaClient } from "@prisma/client"
+import { z } from "zod"
 
 import bcrypt from "bcrypt"
-import { z } from "zod"
-import { PrismaClient } from "@prisma/client"
+
+import { validationPassword } from "../helpers/verifications"
+import { CreateToken, ValidationToken } from "../helpers/jwt"
 
 export const Router = express.Router()
 const prisma = new PrismaClient()
@@ -66,16 +69,19 @@ Router.post('/auth/user/', async (req, res, next) => {
     if (!existingUser) {
       res.status(403).json({ msg: 'User not found' })
     } else {
-      const validationPassword = await bcrypt.compare(password, existingUser.password)
-
-      if (!validationPassword) {
-        res.status(403).json({ msg: 'User not found' });
+      
+      const validation = await validationPassword({
+        bcryptPassword: password,
+        password: existingUser.password
+      })
+            
+      if (!validation) {
+        res.status(403).json({ msg: 'Your Informations are wrong' });
       } else {
+        const token = CreateToken(existingUser.id)
+        res.header('auth-token', token)
         res.status(200).json({
-          id: existingUser.id,
-          email: existingUser.email,
           unique: existingUser.unique,
-          msg: "Logged :)"
         })
       }
     }
@@ -89,8 +95,6 @@ Router.post('/auth/user/', async (req, res, next) => {
 Router.get('/user/:unique', async (req, res) => {
 
   const { unique } = req.params
-  console.log(unique);
-  
 
   const infoUser = await prisma.user.findUnique({
     where: {

@@ -1,17 +1,12 @@
-interface UserProps {
-  name: string,
-  email: string,
-  password: string,
+import bcrypt from "bcrypt"
+
+interface ValidationPassword {
+  bcryptPassword: string,
+  password: string
 }
 
-export function VerifyAllInformations(user: UserProps){
-  if (user.name.length < 5 || user.email.length < 15 || user.password.length < 8) {
-    return (
-      {
-        msg: 'You must provide all the informations required'
-      }
-    )
-  }
-}
+export async function validationPassword({ bcryptPassword, password }: ValidationPassword) {
+  const compare = await bcrypt.compare(bcryptPassword, password)
 
-// res.status(400).json({ msg: 'You must provide all the informations required' })
+  return compare
+}

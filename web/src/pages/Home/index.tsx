@@ -1,10 +1,12 @@
+import axios from "axios"
 import { useEffect, useState } from "react"
 import { Link, Outlet, useParams } from "react-router-dom"
-import axios from "axios"
 
 import { Header } from "../../components/Header"
+
+import api from "../../lib/api"
+
 import './index.css'
-import { Coisas } from "../../components/Coisas"
 
 
 export interface InfoLoginProps {
@@ -22,7 +24,7 @@ export function Home() {
   const [infoLogin, setInfoLogin] = useState<InfoLoginProps>()
 
   useEffect(() => {
-    axios.get(`http://localhost:3333/user/${unique}`)
+    api.get(`user/${unique}`)
       .then(res => {
         setInfoLogin(res.data)
       })

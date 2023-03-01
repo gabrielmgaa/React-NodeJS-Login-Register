@@ -1,7 +1,8 @@
-import axios from "axios"
 import { FormEvent, useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import { FaEye, FaEyeSlash } from "react-icons/fa"
+
+import api from "../../lib/api"
 
 import './index.css'
 
@@ -22,7 +23,7 @@ export function Login() {
     const data = Object.fromEntries(formData)
 
     try {
-      await axios.post('http://localhost:3333/auth/user', {
+      await api.post('/auth/user', {
         "email": data.email,
         "password": data.password
       }).then(res => {
@@ -30,7 +31,6 @@ export function Login() {
         navigate(`home/${res.data.unique}/info`)
       }).catch(error => {
         setWarning(error.response.data)
-        // console.log(error.response);
       })
     } catch (error) {
       console.log(error);     
