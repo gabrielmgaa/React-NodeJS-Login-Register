@@ -1,9 +1,10 @@
 import axios from "axios"
-import { FormEvent, useState } from "react"
+import { FormEvent, useContext, useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import { FaEye, FaEyeSlash } from "react-icons/fa"
 
 import './index.css'
+import { AuthContext } from "../../context/Auth/AuthContext"
 
 export interface WarningProps {
   msg: string
@@ -14,6 +15,7 @@ export function Login() {
   const [isVisible, setIsVisible] = useState(false)
   const [warning, setWarning] = useState<WarningProps>({ msg: "" })
   const navigate = useNavigate()
+  const auth = useContext(AuthContext)
 
   async function handleAuthLogin(e: FormEvent) {
     e.preventDefault()
@@ -21,20 +23,30 @@ export function Login() {
     const formData = new FormData(e.target as HTMLFormElement)
     const data = Object.fromEntries(formData)
 
-    try {
-      await axios.post('http://localhost:3333/auth/user', {
-        "email": data.email,
-        "password": data.password
-      }).then(res => {
-        setWarning(res.data)        
-        navigate(`home/${res.data.unique}/info`)
-      }).catch(error => {
-        setWarning(error.response.data)
-        // console.log(error.response);
-      })
-    } catch (error) {
-      console.log(error);     
+    if (data.email && data.password) {
+      const isLogged = await auth.signin(data.email as string, data.password as string)
+
+      if (isLogged) {
+        navigate('/home/info')
+      } else {
+        setWarning({ msg: "Your Informations are wrong" })
+      }
     }
+
+    // try {
+    //   await axios.post('http://localhost:3333/auth/user', {
+    //     "email": data.email,
+    //     "password": data.password
+    //   }).then(res => {
+    //     setWarning(res.data)        
+    //     navigate(`home`)
+    //   }).catch(error => {
+    //     setWarning(error.response.data)
+    //     // console.log(error.response);
+    //   })
+    // } catch (error) {
+    //   console.log(error);     
+    // }
   }
 
   function toggleIsVisible() {

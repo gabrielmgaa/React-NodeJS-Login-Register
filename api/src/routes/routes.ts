@@ -70,6 +70,8 @@ Router.post('/auth/user/', async (req, res, next) => {
     const { email, password } = req.body
 
     const existingUser = await findUserByEmail(email)
+    console.log(existingUser);
+    
 
     if (!existingUser) {
       res.status(403).json({ msg: 'User not found' })
@@ -79,6 +81,7 @@ Router.post('/auth/user/', async (req, res, next) => {
         bcryptPassword: password,
         password: existingUser.password
       })
+      
 
       if (!validation) {
         res.status(403).json({ msg: 'Your Informations are wrong' });
@@ -92,7 +95,7 @@ Router.post('/auth/user/', async (req, res, next) => {
         res.status(200).json({
           accessToken,
           refreshToken,
-          unique: existingUser.unique,
+          existingUser
         })
       }
     }
@@ -139,10 +142,12 @@ Router.post('/refreshToken', async (req, res) => {
 Router.get('/profile/', isAuthenticated, async (req, res) => {
 
   const { userId } = req.user
+  console.log(userId);
+
 
   const infoUser = await findUserById(userId)
 
-  res.status(200).json([infoUser])
+  res.status(200).json(infoUser)
 })
 
 // just for demo purposes

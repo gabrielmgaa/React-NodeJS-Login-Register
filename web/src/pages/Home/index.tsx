@@ -1,13 +1,13 @@
-import { useEffect, useState } from "react"
-import { Link, Outlet, useParams } from "react-router-dom"
-import axios from "axios"
+import { useContext, useEffect, useState } from "react"
+import { Link, Outlet } from "react-router-dom"
 
 import { Header } from "../../components/Header"
 import './index.css'
-import { Coisas } from "../../components/Coisas"
+import { AuthContext } from "../../context/Auth/AuthContext"
+import { api } from "../../lib/api"
 
 
-export interface InfoLoginProps {
+export interface InfoLoginProps{
   id: string,
   name: string,
   email: string,
@@ -16,17 +16,18 @@ export interface InfoLoginProps {
 
 export function Home() {
 
-
-  const { unique } = useParams()
-
-  const [infoLogin, setInfoLogin] = useState<InfoLoginProps>()
-
-  useEffect(() => {
-    axios.get(`http://localhost:3333/user/${unique}`)
-      .then(res => {
-        setInfoLogin(res.data)
-      })
-  }, [])
+  const [infoLogin, setInfoLogin] = useState<InfoLoginProps[]>([])
+  const auth = useContext(AuthContext)
+  
+  // useEffect(() => {
+  //   api.get('/profile', {
+  //     headers: {
+  //       Authorization: `Bearer ${auth.user?.accessToken}`
+  //     }
+  //   })
+  //   .then( res => console.log(res.data)
+  //   )
+  // }, [])
 
   return (
     <>
@@ -47,11 +48,21 @@ export function Home() {
             </ul>
           </div>
         </aside>
-
         <div className="content">
           <Outlet />
         </div>
       </section>
+      {
+        infoLogin?.map(info => {
+          return (
+            <div key={info.id} className="infos-user">
+              <span>Email: {info.email}</span>
+              <span>Name: {info.name}</span>
+              <span>Name: {info.name}</span>
+            </div>
+          )
+        })
+      }
     </>
   )
 }

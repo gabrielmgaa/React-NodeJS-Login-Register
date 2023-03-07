@@ -11,18 +11,22 @@ import { Login } from './pages/Login'
 
 import './global.css'
 import { Coisas } from './components/Coisas'
+import { AuthProvider } from './context/Auth/AuthProvider'
+import { RequireAuth } from './context/Auth/RequireAuth'
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Login />} />
-        <Route path="home/:unique" element={<Home />} >
-          <Route path="info" element={<Info />} />
-          <Route path="coisas" element={<Coisas />} />
-        </Route>
-        <Route path="create" element={<Register />} />
-      </Routes>
-    </BrowserRouter>
+    <AuthProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Login />} />
+          <Route path="home" element={<RequireAuth><Home /></RequireAuth>} >
+            <Route path="info" element={<Info />} />
+            <Route path="coisas" element={<Coisas />} />
+          </Route>
+          <Route path="create" element={<Register />} />
+        </Routes>
+      </BrowserRouter>
+    </AuthProvider>
   </React.StrictMode>
 )

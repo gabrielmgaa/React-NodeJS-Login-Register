@@ -11,7 +11,7 @@ interface UserProps {
 export function generateAccessToken(user: UserProps) {
   return (
     jwt.sign({ userId: user.id }, process.env.JWT_ACCESS_SECRET as string, {
-      expiresIn: '5m',
+      expiresIn: '8h',
     })
   )
 }

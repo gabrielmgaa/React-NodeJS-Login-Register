@@ -9,6 +9,8 @@ export function isAuthenticated(req: Request, res: Response, next: NextFunction)
       /^Bearer\s/,
       ''
     )
+    // console.log(accessToken);
+    
 
     if (!accessToken) {
       return res.status(401).json({ msg: "Unauthorized" })
