@@ -9,20 +9,15 @@ import './index.css'
 
 export function Info() {
 
-  // const [info, setInfo] = useState<infoUserProps[]>([])
   const auth = useContext(AuthContext)
-  
-  // useEffect(() => {
-  //   axios.get(`http://localhost:3333/user/${unique}`)
-  //     .then(res => {
-  //       setInfo(res.data)
-  //     })
-  // }, [])
 
   return (
-    <div key={auth.user?.id} className="infos-user">
-      <span>Email: {auth.user?.email}</span>
-      <span>Name: {auth.user?.name}</span>
-    </div>
+    <>
+      <div className="infos-user">
+        <span>Email: {auth.user?.email}</span>
+        <span>Name: {auth.user?.name}</span>
+      </div>
+    </>
+
   )
 }

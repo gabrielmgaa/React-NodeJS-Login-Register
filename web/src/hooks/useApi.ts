@@ -12,7 +12,10 @@ export function useApi() {
     },
     signin: async (email: string, password: string) => {
       const response = await api.post('/auth/user/', { email, password })
-      return response.data
+      .then( res => res.data)
+      .catch( err => err.response.data)
+      
+      return response
     },
     // signout: async () => {
     //   // ainda não tenho

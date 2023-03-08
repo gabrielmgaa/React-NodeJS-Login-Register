@@ -52,17 +52,6 @@ export function Home() {
           <Outlet />
         </div>
       </section>
-      {
-        infoLogin?.map(info => {
-          return (
-            <div key={info.id} className="infos-user">
-              <span>Email: {info.email}</span>
-              <span>Name: {info.name}</span>
-              <span>Name: {info.name}</span>
-            </div>
-          )
-        })
-      }
     </>
   )
 }

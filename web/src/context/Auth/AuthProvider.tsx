@@ -7,16 +7,16 @@ export function AuthProvider({ children }: { children: JSX.Element }) {
   const [user, SetUser] = useState<User | null>(null)
   const api = useApi()
 
-    useEffect(() => {
-      async function validateToken() {
-        const storageToken = localStorage.getItem('authorization')
-        if (storageToken) {
-          const data = await api.validateToken(storageToken)
-          SetUser(data)
-        }
+  useEffect(() => {
+    async function validateToken() {
+      const storageToken = localStorage.getItem('authorization')
+      if (storageToken) {
+        const data = await api.validateToken(storageToken)
+        SetUser(data)
       }
-      validateToken()
-    }, [])
+    }
+    validateToken()
+  }, [])
 
 
   async function signin(email: string, password: string) {

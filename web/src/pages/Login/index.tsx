@@ -25,11 +25,11 @@ export function Login() {
 
     if (data.email && data.password) {
       const isLogged = await auth.signin(data.email as string, data.password as string)
-
+      
       if (isLogged) {
         navigate('/home/info')
       } else {
-        setWarning({ msg: "Your Informations are wrong" })
+        setWarning({ msg: "User Not Found" })
       }
     }
 

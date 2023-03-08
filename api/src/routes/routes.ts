@@ -74,7 +74,7 @@ Router.post('/auth/user/', async (req, res, next) => {
     
 
     if (!existingUser) {
-      res.status(403).json({ msg: 'User not found' })
+      res.status(403).json({ msg: 'User not Found' })
     } else {
 
       const validation = await validationPassword({
@@ -84,7 +84,7 @@ Router.post('/auth/user/', async (req, res, next) => {
       
 
       if (!validation) {
-        res.status(403).json({ msg: 'Your Informations are wrong' });
+        res.status(403).json({ msg: 'User not Found' });
       } else {
 
         const jti = v4();
@@ -134,7 +134,7 @@ Router.post('/refreshToken', async (req, res) => {
     })
 
   } catch (error) {
-    res.status(500).json({ msg: error })
+    res.status(500).json({ msg: "Something are wrong" })
   }
 
 })
